@@ -2,7 +2,7 @@ require_relative 'find_files'
 
 def do_action
 
-  puts "Type 'view' to see current input to do list"
+  puts "Type 'view' to see current to do list\nType 'add' to add new item to to do list\nType 'end' to copy items from the input file to the output file and exit the system"
 
   action = gets.chomp.downcase
 
@@ -10,6 +10,14 @@ def do_action
     puts "\nTodo list\n-----------\n"
     system("more -N #{@input}")
     do_action()
+  elsif (action == 'add')
+    puts "Enter new to do item"
+    new_item = gets.chomp
+    system("echo #{new_item} >> #{@input}")
+    do_action()
+  elsif (action == 'end')
+    system("cat #{@input} > #{@output}")
+    return
   else
     puts "You entered an invalid command"
     do_action()
