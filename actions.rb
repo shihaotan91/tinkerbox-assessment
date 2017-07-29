@@ -1,4 +1,5 @@
 require_relative 'find_files'
+require_relative 'select_item'
 
 def do_action
 
@@ -9,7 +10,7 @@ def do_action
   if (action == 'view')
     puts "\nTodo list\n-----------\n"
     system("more -N #{@input}")
-    do_action()
+    select_item()
   elsif (action == 'add')
     puts "Enter new to do item"
     new_item = gets.chomp
