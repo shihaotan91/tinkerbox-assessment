@@ -1,5 +1,5 @@
 require_relative 'find_files'
+require_relative 'actions'
 
-findInput()
-
-exec("cat #{@input} > #{@output}")
+find_input()
+do_action()
