@@ -1,23 +1,23 @@
-def findInput
+def find_input
   puts 'Please enter name of input file'
-  @input = gets.chomp
+  @input = gets.chomp.downcase
 
   if (File.file?(@input))
-    findOutput()
+    find_output()
   else
     puts "ERROR: File does not exist"
-    findInput()
+    find_input()
   end
 end
 
-def findOutput
+def find_output
   puts 'Please enter name of output file'
   @output = gets.chomp
 
   if (File.file?(@output))
-    puts "Copying contents of input into output"
+    return
   else
     puts "ERROR: File does not exist"
-    findOutput()
+    find_output()
   end
 end
