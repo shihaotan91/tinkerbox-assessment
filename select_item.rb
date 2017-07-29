@@ -1,30 +1,24 @@
 require 'csv'
 require_relative 'find_files'
 require_relative 'actions'
+require_relative 'statuses'
 
 def select_item
 
-  complete = "1. Mark as complete"
-  incomplete = "2. Mark as incomplete"
-  doing = "3. Mark as doing"
+  puts "Todo list\n-----------"
+  system("more -N #{@input}")
 
-  status_array = [complete, incomplete, doing]
+  puts "Select a valid item number from the todo list\nOr select 0 to return to the previous function"
 
-  puts "Select a valid item number from the todo list"
+  @selection = gets.chomp.to_i
 
-  selection = gets.chomp.to_i
-
-  if(selection > 0 && selection <= CSV.read(@input).count)
-    system("sed -n '#{selection},#{selection} p' #{@input}")
-    puts "Actions\n-----\n"
-    puts status_array
-    puts "Type 'back' to return to previous function"
-    selection_action = gets.chomp
-    if (selection_action == 'back')
-      do_action()
-    else
-      select_item()
-    end
+  if(@selection > 0 && @selection <= CSV.read(@input).count)
+    print "#{@selection}. "
+    system("sed -n '#{@selection},#{@selection} p' #{@input}")
+    assign_status()
+    select_item()
+  elsif(@selection == 0)
+    do_action()
   else
     puts "Please input a valid Integer"
     select_item()
