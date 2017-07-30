@@ -1,5 +1,7 @@
-require_relative 'find_files'
 require_relative 'actions'
 
-find_input()
+include FindCSV
+
+find_files('input')
+find_files('output')
 do_action()
