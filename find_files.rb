@@ -1,24 +1,24 @@
-def find_input
-  puts 'Please enter name of input file'
-  @input = gets.chomp.downcase
+module FindCSV
 
-  if (File.file?(@input))
-    find_output()
-  else
-    puts "ERROR: File does not exist"
-    find_input()
+  def find_files(file_type)
+    puts "Please enter name of #{file_type} file"
+    file_name = gets.chomp
+
+    if (File.file?(file_name) && file_type =='input')
+      @input = file_name
+      return
+    elsif (File.file?(file_name) && file_type =='output')
+      @output = file_name
+      return
+    else
+      puts "ERROR: File does not exist"
+      find_files(file_type)
+    end
   end
 
-end
-
-def find_output
-  puts 'Please enter name of output file'
-  @output = gets.chomp.downcase
-
-  if (File.file?(@output))
-    return
-  else
-    puts "ERROR: File does not exist"
-    find_output()
+  def show_input_file()
+    puts "Todo list\n-----------"
+    system("more -N #{@input}")
   end
+
 end

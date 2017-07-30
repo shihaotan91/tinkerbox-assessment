@@ -1,12 +1,12 @@
 require 'csv'
-require_relative 'find_files'
 require_relative 'actions'
 require_relative 'statuses'
 
+include FindCSV
+
 def select_item
 
-  puts "Todo list\n-----------"
-  system("more -N #{@input}")
+  show_input_file()
 
   puts "Select a valid item number from the todo list\nOr select 0 to return to the previous function"
 

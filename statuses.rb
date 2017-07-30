@@ -1,5 +1,7 @@
 require_relative 'select_item'
 
+include FindCSV
+
 def assign_status
 
   complete = "Mark as complete"
@@ -22,8 +24,6 @@ def assign_status
 
   if (status > 0 && status <= $status_array.size + 1 )
     system("sed -i '' '#{@selection},#{@selection} s/$/ [#{$status_array[status-1].split.last.capitalize}]/' #{@input}")
-    puts "Todo list\n-----------"
-    system("more -N #{@input}")
   elsif (status == 0)
     select_item()
   else
