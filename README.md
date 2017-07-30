@@ -24,3 +24,72 @@ ruby main.rb
 ## User Flow Diagram
 
 User Flow Diagram of the assessment can be found [HERE](http://i.imgur.com/JbNbtWB.jpg)
+
+## Technical implementation explanations
+
+### USING MODULES
+
+As the project grew larger, I decided to use `MODULES` to manage the methods in a meaningful way. For example, the methods `find_files`, `show_input_file` and `show_selection` in `./modules/find_files` all pertains to locating or displaying the contents of the CSV file. Similarly, the methods in `./modules/actions` all pertains to editing a CSV row once you've selected it.
+
+### WHY NOT CLASS
+
+I used `MODULES` instead of `CLASS` because...
+* There are no unique singleton methods used that requires it's parent to be instantiated
+* Most of the methods are params-less and doesn't need to inherit anything from it's parent
+* Because of 1 and 2 there is no need to create an object and keep track of it's state
+
+Another reason why I avoided using class is because to pass down an instance variable from a module to a class, it requires the class to be initialized(I think...). This could be bypassed by making the methods of a class class methods and then passing the module's instance variable directly to it as a param. However, due to frequent recursive calls that happens in the app, this is not ideal.  
+
+### RECURSIVE CALLS
+
+A recursive call happens whenever the user keys in an invalid command at any stage of the app. Because of this, I avoided passing in params into most of the methods to prevent the code from looking clunky.
+
+For example, if the methods in the `commands.rb` file needed params, the file could look like this.
+
+```
+def add_item(params1, params2)
+  ...
+  perform_command(params1, params2)
+end
+
+def perform_command(params1, params2)
+  ...
+  elsif (command == 'add')
+    add_item(params1, params2)
+  else
+    puts "You entered an invalid command"
+    perform_command(params1, params2)
+  end
+end
+```
+### BREAKING DOWN METHODS
+
+I tried my best to break down methods while keeping their names explicit to what it does. There are still a handful of functions that can be combined or optimized, however I feel that would only obscure it's role in the app.
+
+For example, I considered changing the `find_files` method in `./modules/find_files` to look like
+
+```
+def find_files(file_type)
+  ...
+  if (File.file?(file_name) && file_type =='input')
+    @input = file_name
+    find_files('output')
+  elsif (File.file?(file_name) && file_type =='output')
+    @output = file_name
+    return
+  ...  
+end
+```
+
+So that it only needs to be called once instead of twice with different params in main.rb. However, I decided against it because it obscures the function.
+
+### SCOPING VARIABLES
+
+Variables are named and scoped correctly for its intended uses.
+
+For example, in `./modules/actions.rb`
+
+* The variables in @@actions_array are all in CAPS because they are constant variables that are not meant to be changed.
+* @@actions_array and @@action_number are both class variables because they need not be used outside the module.
+* @input and @selection_number are the only two instance variable in the whole app because they are used in many places.
+* There are no global variables in the app.
