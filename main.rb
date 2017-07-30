@@ -1,5 +1,5 @@
 require_relative 'commands'
-require_relative 'select_item'
+require './modules/find_files'
 
 include FindCSV
 

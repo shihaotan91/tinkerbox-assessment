@@ -1,6 +1,7 @@
 module FindCSV
 
   def find_files(file_type)
+
     puts "Please enter name of #{file_type} file"
     file_name = gets.chomp
 
@@ -14,11 +15,14 @@ module FindCSV
       puts "ERROR: File does not exist"
       find_files(file_type)
     end
+
   end
 
   def show_input_file()
+
     puts "Todo list\n-----------"
     system("more -N #{@input}")
+
   end
 
 end
