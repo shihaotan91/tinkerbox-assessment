@@ -1,7 +1,9 @@
-require_relative 'actions'
+require_relative 'commands'
+require_relative 'select_item'
 
 include FindCSV
 
 find_files('input')
 find_files('output')
-do_action()
+perform_command()
+puts "Goodbye"
