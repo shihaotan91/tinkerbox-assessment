@@ -18,7 +18,6 @@ def perform_command
     perform_command()
   elsif (command == 'end')
     system("cat #{@input} > #{@output}")
-    return
   else
     puts "You entered an invalid command"
     perform_command()
