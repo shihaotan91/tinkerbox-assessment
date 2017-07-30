@@ -8,8 +8,6 @@ def do_action
   action = gets.chomp.downcase
 
   if (action == 'view')
-    puts "\nTodo list\n-----------\n"
-    system("more -N #{@input}")
     select_item()
   elsif (action == 'add')
     puts "Enter new to do item"

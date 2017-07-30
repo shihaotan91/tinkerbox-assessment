@@ -8,11 +8,12 @@ def find_input
     puts "ERROR: File does not exist"
     find_input()
   end
+
 end
 
 def find_output
   puts 'Please enter name of output file'
-  @output = gets.chomp
+  @output = gets.chomp.downcase
 
   if (File.file?(@output))
     return
