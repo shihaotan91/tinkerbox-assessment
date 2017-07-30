@@ -15,8 +15,7 @@ def select_item
   @selection_number = selection.to_i
 
   if(@selection_number > 0 && @selection_number <= CSV.read(@input).count)
-    print "#{@selection_number}. "
-    system("sed -n '#{@selection_number},#{@selection_number} p' #{@input}")
+    show_selection()
     perform_action()
     select_item()
   elsif(selection == 'back')

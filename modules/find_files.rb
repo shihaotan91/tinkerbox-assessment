@@ -25,4 +25,11 @@ module FindCSV
 
   end
 
+  def show_selection()
+
+    print "#{@selection_number}. "
+    system("sed -n '#{@selection_number},#{@selection_number} p' #{@input}")
+
+  end
+
 end
