@@ -1,4 +1,5 @@
 require_relative 'select_item'
+require_relative 'find_files'
 
 include FindCSV
 
@@ -15,16 +16,17 @@ def assign_status
     $status_array.each_with_index do |text, i|
       puts "#{i+1}. #{text}"
     end
-    puts "Or select 0 to return to the previous function"
+    puts "Or type 'back' to return to the previous function"
   end
 
   show_array()
 
-  status = gets.chomp.to_i
+  status = gets.chomp
+  status_number = status.to_i
 
-  if (status > 0 && status <= $status_array.size + 1 )
-    system("sed -i '' '#{@selection},#{@selection} s/$/ [#{$status_array[status-1].split.last.capitalize}]/' #{@input}")
-  elsif (status == 0)
+  if (status_number > 0 && status_number <= $status_array.size + 1 )
+    system("sed -i '' '#{@selection_number},#{@selection_number} s/$/ [#{$status_array[status_number-1].split.last.capitalize}]/' #{@input}")
+  elsif (status == 'back')
     select_item()
   else
     puts "ERROR: Invalid option"

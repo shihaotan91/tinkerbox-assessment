@@ -1,28 +1,27 @@
-require_relative 'find_files'
 require_relative 'select_item'
 
 include FindCSV
 
-def do_action
+def perform_command
 
   puts "Type 'view' to see current to do list\nType 'add' to add new item to to do list\nType 'end' to copy items from the input file to the output file and exit the system"
 
-  action = gets.chomp.downcase
+  command = gets.chomp.downcase
 
-  if (action == 'view')
+  if (command == 'view')
     select_item()
-  elsif (action == 'add')
+  elsif (command == 'add')
     puts "Enter new to do item"
     new_item = gets.chomp
     system("echo #{new_item} >> #{@input}")
     show_input_file()
-    do_action()
-  elsif (action == 'end')
+    perform_command()
+  elsif (command == 'end')
     system("cat #{@input} > #{@output}")
     return
   else
     puts "You entered an invalid command"
-    do_action()
+    perform_command()
   end
 
 end
