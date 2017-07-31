@@ -81,7 +81,7 @@ def find_files(file_type)
 end
 ```
 
-So that it only needs to be called once instead of twice with different params in main.rb. However, I decided against it because it obscures the function.
+So that it only needs to be called once instead of twice with different params in `main.rb`. However, I decided against it because it obscures the function.
 
 ### SCOPING VARIABLES
 
@@ -93,3 +93,15 @@ For example, in `./modules/actions.rb`
 * @@actions_array and @@action_number are both class variables because they need not be used outside the module.
 * @input and @selection_number are the only two instance variable in the whole app because they are used in many places.
 * There are no global variables in the app.
+
+### CASE VS IF/ELSE
+
+With many conditions/cases, case has better performance than if/else statements since if your condition is queued at the end of the if/else chain, it requires every prior condition to be evaluated before hitting it.
+
+However, given that my longest if/else statement only has 4 conditions, the difference in performance is negligible. In the end I choose to use what I'm more familiar with.
+
+### SED VS AWK
+
+This is my time manipulating CSV/Text files through command line. After doing some research, I found out that the two most common ways to do so is `sed` and `awk`.
+
+Given the time constraint, I went with `sed` because its syntax is easier to understand.  
